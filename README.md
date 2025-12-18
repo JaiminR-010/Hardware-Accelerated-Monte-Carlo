@@ -40,3 +40,7 @@ This project implements a Monte Carlo simulation for European option pricing on 
 ## Performance comparison
 
 ![Performance overview](performance_comparison.png)
+
+
+## Summary Table (for different Ns)
+  ![summary table](summary_table.png)
