@@ -34,29 +34,28 @@ For each Monte Carlo path indexed by (i):
 
 2. Compute the log‑price exponent:
 
-   $$
-   x_i = \left(r - \tfrac{1}{2}\sigma^2\right)T + \sigma\sqrt{T}, Z_i
-   $$
+  <p align="center">
+  <img src="/img/log_price_exp.png" >
+  </p>
+
 
 3. Compute the terminal asset price:
 
-   $$
-   S_T^{(i)} = S_0 \cdot \exp(x_i)
-   $$
+  <p align="center">
+  <img src="/img/terminal_asset_price.png" >
+  </p>
 
 4. Compute the European call payoff and accumulate:
 
-   $$
-   \text{payoff}_i = \max\left(S_T^{(i)} - K,; 0\right)
-   $$
+  <p align="center">
+  <img src="/img/payoff.png" >
+  </p>
 
-The kernel accumulates
+The kernel accumulates the following into a running sum:
 
 $$
 \sum_{i=0}^{N-1} \text{payoff}_i
 $$
-
-into a running sum.
 
 At the end of the computation, the accumulated payoff is written to `sum_out[0]`. The host code completes the pricing by computing:
 
@@ -68,21 +67,10 @@ $$
 
 ## Parallelism and Pipelining
 
-To exploit FPGA parallelism, the kernel evaluates multiple paths per cycle using a fixed number of **lanes**:
+To exploit FPGA parallelism, the kernel evaluates multiple paths per cycle using a fixed number of **lanes** (8, in this case):
 
-* The input array `Z` is accessed with a strided index so that each lane processes a disjoint subset of paths.
+* The input array `Z` is accessed so that each lane processes a disjoint subset of paths.
 * The main computation loop is **pipelined with initiation interval (II) = 1**, meaning a new group of lanes enters the pipeline every clock cycle once the pipeline is full.
 * Each lane maintains its own local accumulator in a small on‑chip array of partial sums.
 
 After all paths have been processed, a short reduction loop sums the lane‑wise partial sums into a single scalar result.
-
----
-
-## Accuracy vs. Performance
-
-The kernel supports two implementation options for the exponential function:
-
-* A fast approximate exponential to maximize throughput, or
-* The standard `hls::expf` implementation for higher numerical accuracy.
-
-This choice trades off a small systematic bias in the option price against additional latency per path. In practice, the residual difference compared to a CPU reference is typically dominated by Monte Carlo sampling error and floating‑point accumulation order for large (N).
