@@ -21,3 +21,6 @@ This project implements a Monte Carlo simulation for European option pricing on 
 - In general, FPGA achieves large speedups (hundreds of times faster) compared with the single-threaded CPU baseline
 - Speed is directly proportional to N
 - Option prices from the FPGA closely match the CPU Monte Carlo estimates, with any remaining difference mainly due to floating-point accumulation order and choice of exponential implementation.
+
+- ![Performance Comparison](performance_comparison.png)
+- ![Summary Table](summary_table.png)
