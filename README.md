@@ -11,6 +11,20 @@ This project implements a Monte Carlo simulation for European option pricing on 
 - PYNQ-based Python host code to load overlays, manage buffers, launch the kernel, and measure speedup versus CPU.
 - Graph and table for performance comparison
 
+## Project Structure
+- `monte_carlo.cpp` — HLS C++ code for FPGA kernel
+- `monte_carlo.py` — Python Jupyter Notebook for testing, simulating, and comparing CPU vs FPGA performance
+- `design_1.bit` — FPGA bitstream
+- `design_1.hwh` — FPGA hardware description for overlay
+- `performance_comparison.png` — Performance comparison between CPU and FPGA
+- `summary_table.png` — Summary of results
+- `README.md` — This file
+
+## Documentation
+
+- [Architecture & Design](docs/architecture.md)
+- [HLS Kernel Details](docs/hls-kernel.md)
+- [Performance Experiments](docs/experiments.md)
 
 ## Requirements
 - PYNQ-Z2 (or compatible Zynq-7000) FPGA board with PYNQ image installed.
@@ -22,5 +36,6 @@ This project implements a Monte Carlo simulation for European option pricing on 
 - Speed is directly proportional to N
 - Option prices from the FPGA closely match the CPU Monte Carlo estimates, with any remaining difference mainly due to floating-point accumulation order and choice of exponential implementation.
 
-- ![Performance Comparison](performance_comparison.png)
-- ![Summary Table](summary_table.png)
+## Performance comparison:
+![Performance Comparison](performance_comparison.png)
+![Summary Table](summary_table.png)
