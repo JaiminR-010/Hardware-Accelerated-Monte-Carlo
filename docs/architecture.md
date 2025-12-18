@@ -11,7 +11,7 @@ This project accelerates a Monte Carlo simulation for European option pricing by
   - Runs a baseline Monte Carlo implementation on the CPU.  
   - Sets up buffers and registers for the FPGA kernel, launches it, and reads back results.
 
-- **FPGA kernel (Vitis HLS C/C++)**  
+- **FPGA kernel (Vitis HLS C++)**  
   - Receives an array of normals \(Z\) and scalar parameters.  
   - Computes terminal prices and payoffs in parallel lanes.  
   - Outputs a single sum of all path payoffs to external memory.
