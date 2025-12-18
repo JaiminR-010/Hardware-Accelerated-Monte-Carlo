@@ -12,6 +12,8 @@ This project implements a Monte Carlo simulation for European option pricing on 
 - Graph and table for performance comparison
 
 ## Project Structure
+- `docs` — Contains documentation for this project
+- `img` — Contains some equation images for doc purposes that couldn't be directly typed due to technical errors
 - `monte_carlo.cpp` — HLS C++ code for FPGA kernel
 - `monte_carlo.py` — Python Jupyter Notebook for testing, simulating, and comparing CPU vs FPGA performance
 - `design_1.bit` — FPGA bitstream
@@ -24,7 +26,6 @@ This project implements a Monte Carlo simulation for European option pricing on 
 
 - [Architecture & Design](docs/architecture.md)
 - [HLS Kernel Details](docs/hls-kernel.md)
-- [Performance Experiments](docs/experiments.md)
 
 ## Requirements
 - PYNQ-Z2 (or compatible Zynq-7000) FPGA board with PYNQ image installed.
